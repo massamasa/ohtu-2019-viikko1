@@ -11,7 +11,6 @@ apply plugin: 'java'
 
 // Apply the application plugin to add support for building an application
 apply plugin: 'application'
-
 // In this section you declare where to find the dependencies of your project
 repositories {
     // Use jcenter for resolving your dependencies.
@@ -29,4 +28,12 @@ dependencies {
 
 // Define the main class for the application
 mainClassName = 'ohtu.ohtuvarasto.Main'
-
+apply plugin: 'jacoco'
+jacoco {
+    toolVersion = "0.8.4"
+}
+jar {
+    manifest {
+        attributes 'Main-Class': 'ohtu.ohtuvarasto.Main'
+    }
+}

@@ -13,11 +13,17 @@ import static org.junit.Assert.*;
 public class VarastoTest {
 
     Varasto varasto;
+    Varasto kuormitettuVarasto;
+    Varasto negatiivisenTilavuudenIlmoitettuVarasto;
+    Varasto negatiivisenSaldonIlmoitettuKuormitettuVarasto;
     double vertailuTarkkuus = 0.0001;
 
     @Before
     public void setUp() {
         varasto = new Varasto(10);
+        negatiivisenTilavuudenIlmoitettuVarasto = new Varasto(-1);
+        negatiivisenSaldonIlmoitettuKuormitettuVarasto = new Varasto(-1, -1);
+        kuormitettuVarasto = new Varasto(10, 3);
     }
 
     @Test
@@ -65,4 +71,48 @@ public class VarastoTest {
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
     }
 
+    @Test
+    public void negatiivisenOttaminenEiMuutaSaldoa() {
+        kuormitettuVarasto.otaVarastosta(-1);
+        assertEquals(3, kuormitettuVarasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void liianOttaminenOttaaVainNiinPaljonKuinPystyy() {
+        kuormitettuVarasto.otaVarastosta(11);
+        assertEquals(0, kuormitettuVarasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void negatiivisenLisaaminenEiMuutaSaldoa() {
+        kuormitettuVarasto.lisaaVarastoon(-1);
+        assertEquals(3, kuormitettuVarasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void liianLisaaminenTayttaaVainNiinPaljonKuinPystyy() {
+        varasto.lisaaVarastoon(11);
+        assertEquals(10, varasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void negatiivinenTilavuusNollataan() {
+        assertEquals(0, negatiivisenTilavuudenIlmoitettuVarasto.getTilavuus(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void negatiivinenTilavuusNollataanKunAlkuSaldoIlmoitettu() {
+        Varasto varasto2 = new Varasto(-1, 1);
+        assertEquals(0, varasto2.getTilavuus(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void negatiivinenSaldoNollataan() {
+        assertEquals(0, negatiivisenSaldonIlmoitettuKuormitettuVarasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void toStringToimii() {
+        assertEquals("saldo = 3.0, vielä tilaa 7.0", kuormitettuVarasto.toString());
+    }
 }
