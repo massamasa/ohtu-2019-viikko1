@@ -32,6 +32,14 @@ apply plugin: 'jacoco'
 jacoco {
     toolVersion = "0.8.4"
 }
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+}
+
 jar {
     manifest {
         attributes 'Main-Class': 'ohtu.ohtuvarasto.Main'
