@@ -103,7 +103,7 @@ public class VarastoTest {
     @Test
     public void negatiivinenTilavuusNollataanKunAlkuSaldoIlmoitettu() {
         Varasto varasto2 = new Varasto(-1, 1);
-        assertEquals(1, varasto2.getTilavuus(), vertailuTarkkuus);
+        assertEquals(0, varasto2.getTilavuus(), vertailuTarkkuus);
     }
 
     @Test
