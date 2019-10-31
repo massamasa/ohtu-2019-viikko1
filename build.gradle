@@ -27,7 +27,7 @@ dependencies {
 }
 
 // Define the main class for the application
-mainClassName = 'ohtu.ohtuvarasto.Main'
+mainClassName = 'main.Main'
 apply plugin: 'jacoco'
 jacoco {
     toolVersion = "0.8.4"
@@ -48,6 +48,6 @@ jacocoTestReport {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'ohtu.ohtuvarasto.Main'
+        attributes 'Main-Class': 'main.Main'
     }
 }
