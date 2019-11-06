@@ -63,6 +63,11 @@ public class Varasto {
     }
 
     public double otaVarastosta(double maara) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                
+            }
+        }
         if (maara < 0) { // virhetilanteessa voidaan tehdä 
 
             return 0.0;   // tällainen pikapoistuminenkin!
